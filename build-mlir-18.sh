@@ -30,9 +30,13 @@ cmake   \
 
 
 
-cmake --build . --target standalone-opt
-cmake --build . --target standalone-translate
-cmake --build . --target mlir-doc
+# We need this
+cmake --build . --target toy-compiler
+
+# We donot need them anymore
+# cmake --build . --target standalone-opt
+# cmake --build . --target standalone-translate
+# cmake --build . --target mlir-doc
 
 
 

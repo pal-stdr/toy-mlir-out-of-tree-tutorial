@@ -54,3 +54,6 @@ add_subdirectory(test)
 add_subdirectory(standalone-opt)
 add_subdirectory(standalone-plugin)
 add_subdirectory(standalone-translate)
+
+# ==== Added later ====
+add_subdirectory(tools)
