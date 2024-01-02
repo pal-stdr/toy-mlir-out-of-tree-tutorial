@@ -14,33 +14,45 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 - More coming....
 
 
-## ====== CHAPTER 0-0 Starts ======
+## ====== CHAPTER 0-1 Starts ======
 
 
 ## Objective
 
-- Build `LLVM` from src.
+- Collect and setup the `MLIR out-of-tree` template from `llvm-18-src-build`.
 
 
 ## Git Branch name
 
-- `ch-0-0-build-llvm`
+- `ch-0-1-prep-mlir-template`
 
 
 ## How To?
 
-Officially this `CHAPTER 0-0` doesn't exists in [Official Toy Tutorial](https://mlir.llvm.org/docs/Tutorials/Toy/) 😅. Here, `0` means started from absolute `0`. The first step is to build `llvm-project` from src.
-
-- If you are a complete newbie to `LLVM`, `LLVM` or compiler world, follow [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.1.SETUP-LLVM-for-NEWBIES.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.1.SETUP-LLVM-for-NEWBIES.md).
-
-- If you are already familiar with the concepts, then follow [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md). If you need clarifications/explanations for some steps, jump to [0.0.1.SETUP-LLVM-for-NEWBIES.md](Docs/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.1.SETUP-LLVM-for-NEWBIES.md).
-
-- If you want to install `clang`, `llvm` without building it, use Ubuntu `update-alternatives` method & read [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/HOW-TO-MANAGE-MULTIVERSION-gcc-clang-LLVM-WITH-update-alternatives.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/HOW-TO-MANAGE-MULTIVERSION-gcc-clang-LLVM-WITH-update-alternatives.md) tuto. **BUT NOT RECOMMENDED at all FOR THIS TUTO.**
-
-- (OPTIONAL, for VSCode users) The [VS Code settings](.vscode/) for the entire tuto series. E.g. ENV var like this one `${env:LLVM_AND_CLANG_INCLUDE_PATH}` used in [c_cpp_properties.json](.vscode/c_cpp_properties.json), came from the ENV vars in `$HOME/.profile` setup for LLVM, which you [can find in line 231 of 0.0.2.Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md)
+- Follow the guideline given in [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md)
 
 
-## ====== CHAPTER 0-0 Ends ======
+## Newly added files and dirs
+
+```sh
+Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md
+include/
+lib/
+python/
+standalone-opt/
+standalone-plugin/
+standalone-translate/
+test/
+CMakeLists.txt
+build-mlir-18.sh
+```
+
+## Key things
+
+**`build/bin/` will be populated with `standalone-opt` & `standalone-translate` binaries. You can start playing with them 😁. I didn't commit them, because after building, `standalone-opt` sizes around `160MB` which exceeds the limit of `github` individual filesize limit of `100MB`. Also, this tutorial's scope is `Toy` compiler. So I will not be going through those bins.**
+
+
+## ====== CHAPTER 0-1 Ends ======
 
 
 
