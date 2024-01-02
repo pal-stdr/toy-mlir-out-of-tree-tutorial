@@ -1,0 +1,59 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build Toy compiler",
+            "isBackground": false,
+            "linux": {
+                "command": "./build-mlir-18-standalone.sh",
+                "args": [
+                    
+                ]
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": false
+            // },
+            // "problemMatcher": [
+            //     "$gcc"
+            // ]
+        },
+        {
+            "type": "shell",
+            "label": "Emit AST by running Toy compiler",
+            "linux": {
+                "command": "./build/bin/toy-compiler",
+                "args": [
+
+                    "test/Examples/Toy/Ch1/ast.toy",
+
+                    "-emit=ast",   // Current active file while pressing Ctrl+Shift+B
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ],
+            },
+            "osx": {
+                "command": ""
+            },
+            "windows": {
+                "command": ""
+            },
+            
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+        }
+    ]
+}

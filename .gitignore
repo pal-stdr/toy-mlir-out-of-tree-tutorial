@@ -1,0 +1,12 @@
+# Ignore all the subdirs inside build/, except bin/
+# build/*: Ignores all subdirectories inside build/.
+# !build/bin/: Excludes the bin/ directory from the previous rule.
+build/*
+!build/bin/
+
+# Ignore following bins. Because standalone-opt sized 160MB, which cross github standard file size of 100MB
+build/bin/standalone-opt
+build/bin/standalone-translate
+
+# If toy-compiler bin also cross the github filesize limit, we have to ignore it too
+# build/bin/toy-compiler
