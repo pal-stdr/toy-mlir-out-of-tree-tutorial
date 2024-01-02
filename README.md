@@ -14,45 +14,83 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 - More coming....
 
 
-## ====== CHAPTER 0-1 Starts ======
+## ====== CHAPTER 0-2 Starts ======
 
 
 ## Objective
 
-- Collect and setup the `MLIR out-of-tree` template from `llvm-18-src-build`.
+- How to setup a working `Toy` compiler project scaffold. [Note: Without using/collecting the lexer, parser codes]
 
 
 ## Git Branch name
 
-- `ch-0-1-prep-mlir-template`
+- `ch-0-2-prep-toy-scaffold`
 
 
 ## How To?
 
-- Follow the guideline given in [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md)
+- Follow the guideline given in [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.2.SETUP-MLIR-TOY-PROJECT-SCAFFOLD.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.2.SETUP-MLIR-TOY-PROJECT-SCAFFOLD.md)
+- For `cmake` related query, go to [Docs/MISCELLANEOUS/CMAKE-HOW-TO](Docs/MISCELLANEOUS/CMAKE-HOW-TO).
 
 
 ## Newly added files and dirs
 
 ```sh
-Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md
-include/
-lib/
-python/
-standalone-opt/
-standalone-plugin/
-standalone-translate/
-test/
+
+# Newly added Docs
+Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.2.SETUP-MLIR-TOY-PROJECT-SCAFFOLD.md
+Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md
+Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-TRICKS-TIPS.md
+Docs/MISCELLANEOUS/UTILITY-COMMANDS/GIT-COMMANDS.md
+
+
+# Newly added dir for toy-compiler
+tools/
+tools/toy-compiler/
+tools/toy-compiler/include
+tools/toy-compiler/lib
+
+
+# Newly added code files
+tools/CMakeLists.txt
+tools/toy-compiler/CMakeLists.txt
+tools/toy-compiler/toy-compiler.cpp
+tools/toy-compiler/lib/CMakeLists.txt
+
+
+# Modified
 CMakeLists.txt
+README.md
 build-mlir-18.sh
+
+
+# Example Toy code dir (e.g. ast.toy, codegen.toy, etc. )
+test/Examples/Toy/
+
+
+# Added bin (empty bin, doesn't work)
+build/bin/toy-compiler
+
+
+
+# Toy project scaffold
+├── tools
+    ├── CMakeLists.txt
+    └── toy-compiler
+        ├── CMakeLists.txt
+        ├── include
+        ├── lib
+        │   └── CMakeLists.txt
+        └── toy-compiler.cpp  # <==== This is your toy-compiler entry point (i.e. where main() exists)
+
 ```
 
 ## Key things
 
-**`build/bin/` will be populated with `standalone-opt` & `standalone-translate` binaries. You can start playing with them 😁. I didn't commit them, because after building, `standalone-opt` sizes around `160MB` which exceeds the limit of `github` individual filesize limit of `100MB`. Also, this tutorial's scope is `Toy` compiler. So I will not be going through those bins.**
+**`build/bin/` contains the built binary `toy-compiler`. This is an empty bin. So you can't start playing with it still 😁. However, in the upcoming chapters, progressively it will be filled by code**
 
 
-## ====== CHAPTER 0-1 Ends ======
+## ====== CHAPTER 0-2 Ends ======
 
 
 
