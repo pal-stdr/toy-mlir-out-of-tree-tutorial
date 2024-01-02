@@ -24,8 +24,10 @@ include_directories("${TOY_INCLUDE_DIR}")
 add_subdirectory("${TOY_LIB_DIR}")
 
 
-# Right now there are no lib files inside lib/ dir. But in next chapter, we are going to add it
-set(LIBS "")
+# add new lib `MLIRToyParser` (i.e. alias to `AST.cpp`)
+set(LIBS
+        MLIRToyParser
+)
 
 
 add_llvm_executable("${TOY_COMPILER_BIN_NAME}" toy-compiler.cpp)
