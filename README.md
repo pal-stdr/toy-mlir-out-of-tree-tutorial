@@ -14,22 +14,26 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 - More coming....
 
 
-## ====== CHAPTER 0-2 Starts ======
+## ====== CHAPTER 1 Starts ======
 
 
 ## Objective
 
-- How to setup a working `Toy` compiler project scaffold. [Note: Without using/collecting the lexer, parser codes]
+- How to collect & setup lexer, parser from `llvm-18-src-build/mlir/examples/toy` (i.e. `llvm-project`) for Toy language.
+
+
+## Output
+- Given a `filename.toy` as input, will generate an Abstract Syntax Tree 
 
 
 ## Git Branch name
 
-- `ch-0-2-prep-toy-scaffold`
+- `ch-1-toy-parser`
 
 
 ## How To?
 
-- Follow the guideline given in [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.2.SETUP-MLIR-TOY-PROJECT-SCAFFOLD.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.2.SETUP-MLIR-TOY-PROJECT-SCAFFOLD.md)
+- Follow the guideline given in [Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md](Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md)
 - For `cmake` related query, go to [Docs/MISCELLANEOUS/CMAKE-HOW-TO](Docs/MISCELLANEOUS/CMAKE-HOW-TO).
 
 
@@ -38,59 +42,76 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 ```sh
 
 # Newly added Docs
-Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.2.SETUP-MLIR-TOY-PROJECT-SCAFFOLD.md
-Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md
-Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-TRICKS-TIPS.md
-Docs/MISCELLANEOUS/UTILITY-COMMANDS/GIT-COMMANDS.md
+Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md
 
 
 # Newly added dir for toy-compiler
-tools/
-tools/toy-compiler/
-tools/toy-compiler/include
-tools/toy-compiler/lib
+tools/toy-compiler/include/toy-analysis-parser/
+tools/toy-compiler/lib/toy-parser/
+
 
 
 # Newly added code files
-tools/CMakeLists.txt
-tools/toy-compiler/CMakeLists.txt
-tools/toy-compiler/toy-compiler.cpp
-tools/toy-compiler/lib/CMakeLists.txt
+tools/toy-compiler/include/toy-analysis-parser/AST.h
+tools/toy-compiler/include/toy-analysis-parser/Lexer.h
+tools/toy-compiler/include/toy-analysis-parser/Parser.h
+tools/toy-compiler/lib/toy-parser/AST.cpp
+tools/toy-compiler/lib/toy-parser/CMakeLists.txt
 
 
 # Modified
-CMakeLists.txt
+tools/toy-compiler/toy-compiler.cpp
+tools/toy-compiler/CMakeLists.txt
+tools/toy-compiler/lib/CMakeLists.txt
 README.md
-build-mlir-18.sh
 
 
 # Example Toy code dir (e.g. ast.toy, codegen.toy, etc. )
 test/Examples/Toy/
 
 
-# Added bin (empty bin, doesn't work)
-build/bin/toy-compiler
+# Src code for toy compiler
+llvm-project/mlir/examples/toy/
 
 
+# Compile
+./build-mlir-18.sh
 
-# Toy project scaffold
-├── tools
+
+# Test
+./build/bin/toy-compiler test/Examples/Toy/Ch1/ast.toy -emit=ast
+
+
+# Toy project scaffold upto this point
+
+└── tools
     ├── CMakeLists.txt
     └── toy-compiler
-        ├── CMakeLists.txt
+        ├── CMakeLists.txt  # <==== Don't forget to "set(LIBS MLIRToyParser)"
         ├── include
+        │   └── toy-analysis-parser
+        │       ├── AST.h
+        │       ├── Lexer.h
+        │       └── Parser.h
         ├── lib
-        │   └── CMakeLists.txt
+        │   ├── CMakeLists.txt
+        │   └── toy-parser
+        │       ├── AST.cpp
+        │       └── CMakeLists.txt
         └── toy-compiler.cpp  # <==== This is your toy-compiler entry point (i.e. where main() exists)
 
 ```
 
 ## Key things
 
-**`build/bin/` contains the built binary `toy-compiler`. This is an empty bin. So you can't start playing with it still 😁. However, in the upcoming chapters, progressively it will be filled by code**
+**`build/bin/` contains the built binary `toy-compiler`. Now it has the parsing feature which can emit `AST`. progressively it will be filled by code**
 
 
-## ====== CHAPTER 0-2 Ends ======
+## Special Note:
+**[Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md](Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md) is the last doc, where you will get details walk through; to help you to see how the `Toy` language is progressively growing from just a standalone template. Next docs will be very short, just telling you very important key points 🥲. You can use the understanding upto this point to grasp the next ones. Always ask questions, and try to find answers. I am doing exactly the same thing. This is how you will learn and probably the only way to learn working with MLIR/LLVM 🙂**
+
+
+## ====== CHAPTER 1 Ends ======
 
 
 
