@@ -14,11 +14,33 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 - More coming....
 
 
-## ====== CH Placeholder Starts ======
+## ====== CHAPTER 0-0 Starts ======
 
 
+## Objective
 
-## ====== CH Placeholder Ends ======
+- Build `LLVM` from src.
+
+
+## Git Branch name
+
+- `ch-0-0-build-llvm`
+
+
+## How To?
+
+Officially this `CHAPTER 0-0` doesn't exists in [Official Toy Tutorial](https://mlir.llvm.org/docs/Tutorials/Toy/) 😅. Here, `0` means started from absolute `0`. The first step is to build `llvm-project` from src.
+
+- If you are a complete newbie to `LLVM`, `LLVM` or compiler world, follow [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.1.SETUP-LLVM-for-NEWBIES.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.1.SETUP-LLVM-for-NEWBIES.md).
+
+- If you are already familiar with the concepts, then follow [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md). If you need clarifications/explanations for some steps, jump to [0.0.1.SETUP-LLVM-for-NEWBIES.md](Docs/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.1.SETUP-LLVM-for-NEWBIES.md).
+
+- If you want to install `clang`, `llvm` without building it, use Ubuntu `update-alternatives` method & read [Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/HOW-TO-MANAGE-MULTIVERSION-gcc-clang-LLVM-WITH-update-alternatives.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/HOW-TO-MANAGE-MULTIVERSION-gcc-clang-LLVM-WITH-update-alternatives.md) tuto. **BUT NOT RECOMMENDED at all FOR THIS TUTO.**
+
+- (OPTIONAL, for VSCode users) The [VS Code settings](.vscode/) for the entire tuto series. E.g. ENV var like this one `${env:LLVM_AND_CLANG_INCLUDE_PATH}` used in [c_cpp_properties.json](.vscode/c_cpp_properties.json), came from the ENV vars in `$HOME/.profile` setup for LLVM, which you [can find in line 231 of 0.0.2.Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.0.SETUP-LLVM/0.0.2.SETUP-LLVM-for-ADVANCED-USERS.md)
+
+
+## ====== CHAPTER 0-0 Ends ======
 
 
 
