@@ -107,10 +107,6 @@ llvm-project/mlir/examples/toy/
 **`build/bin/` contains the built binary `toy-compiler`. Now it has the parsing feature which can emit `AST`. progressively it will be filled by code**
 
 
-## Special Note:
-**[Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md](Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md) is the last doc, where you will get details walk through; to help you to see how the `Toy` language is progressively growing from just a standalone template. Next docs will be very short, just telling you very important key points 🥲. You can use the understanding upto this point to grasp the next ones. Always ask questions, and try to find answers. I am doing exactly the same thing. This is how you will learn and probably the only way to learn working with MLIR/LLVM 🙂**
-
-
 ## ====== CHAPTER 1 Ends ======
 
 
