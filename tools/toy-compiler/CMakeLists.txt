@@ -1,5 +1,3 @@
-
-
 # Set Toy Compiler binary filename
 set(TOY_COMPILER_BIN_NAME "toy-compiler")
 
@@ -19,14 +17,29 @@ set(TOY_LIB_DIR "${TOY_MAIN_SRC_DIR}/lib")
 include_directories("${TOY_INCLUDE_DIR}")
 
 
+# Added in Ch 2.0.
+# ${STANDALONE_BINARY_DIR} == /path/to/mlir-project/build/
+# For the auto gen ".inc" type headers, this is the location - build/tools/toy-compiler/include/Dialect
+include_directories("${STANDALONE_BINARY_DIR}/tools/toy-compiler/include")
+
+
+# Added in Ch 2.0.
+# We have to also add the "${TOY_INCLUDE_DIR}" as "add_subdirectory()"
+# So now cmake will also treat this dir as subdirectory to run the commands()
+# Read section "2.1. `add_subdirectory()`" from "Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md" to understand the details
+add_subdirectory("${TOY_INCLUDE_DIR}")
+
+
+
 # Point lib files location (i.e. /path/to/mlir-project/tools/toy-compiler/lib)
-# Why use "add_subdirectory", go to "Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md" and read "1."
+# Why use "add_subdirectory", go to "Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md" and read "2.1. add_subdirectory()"
 add_subdirectory("${TOY_LIB_DIR}")
 
 
 # add new lib `MLIRToyParser` (i.e. alias to `AST.cpp`)
 set(LIBS
         MLIRToyParser
+        MLIRToyDialectCPP # <= Added in Ch 2.0
 )
 
 

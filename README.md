@@ -11,67 +11,82 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 - `ch-0-1-prep-mlir-template`: How to collect and setup the `MLIR out-of-tree` template.
 - `ch-0-2-prep-toy-scaffold`: How to setup just `Toy` compiler project scaffold. [Note: Without using/collecting the lexer, parser codes.]
 - `ch-1-toy-parser`: How to collect & setup lexer, parser from `llvm-18-src-build` (i.e. `llvm-project`) for Toy language.
+- `ch-2-0-init-setup-toy-dialect`: Setting up the Dialect headers and lib. No change in `tools/toy-compiler/toy-compiler.cpp`
 - More coming....
 
 
-## ====== CHAPTER 1 Starts ======
+## ====== CHAPTER 2-0 Starts ======
 
 
 ## Objective
 
-- How to collect & setup lexer, parser from `llvm-18-src-build/mlir/examples/toy` (i.e. `llvm-project`) for Toy language.
+- How to initialize the setup of TOY Dialect from `llvm-18-src-build/mlir/examples/toy` (i.e. `llvm-project`) for Toy language.
 
 
 ## Output
-- Given a `filename.toy` as input, will generate an Abstract Syntax Tree 
+- You will not see any visible change of `toy-compiler` bin output 🙂. Because this part only deals with concepts + registering the dialect.
 
 
 ## Git Branch name
 
-- `ch-1-toy-parser`
+- `ch-2-0-init-setup-toy-dialect`
 
 
 ## How To?
 
-- Follow the guideline given in [Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md](Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md)
+- - **I WILL STRONGLY RECOMMEND TO READ [Chapter 2: Emitting Basic MLIR](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/) FROM BEGINNING UNTIL THE END OF THE [Using the Operation Definition Specification (ODS) Framework](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/#using-the-operation-definition-specification-ods-framework) SECTION THOROUGHLY. THEN START FOLLOWING THE REST OF THIS DOC.**
+- For what & why of MLIR - [Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md](Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md)
+- For this chpater, Follow the guideline given in [Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT.md](Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT.md)
 - For `cmake` related query, go to [Docs/MISCELLANEOUS/CMAKE-HOW-TO](Docs/MISCELLANEOUS/CMAKE-HOW-TO).
 
 
 ## Newly added files and dirs
 
 ```sh
+# Newly added Docs Dir
+Docs/MLIR-KNOWLEDGE-BASE/
+Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/
+
 
 # Newly added Docs
-Docs/TOY-TUTO/1.SETUP-TOY-PARSER.md
+Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md
+Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT/2.0.INIT-SETUP-OF-TOY-DIALECT.md
+
+# Modified docs
+Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md
 
 
 # Newly added dir for toy-compiler
-tools/toy-compiler/include/toy-analysis-parser/
-tools/toy-compiler/lib/toy-parser/
+tools/toy-compiler/include/Dialect/
+tools/toy-compiler/lib/Dialect/
 
 
 
 # Newly added code files
-tools/toy-compiler/include/toy-analysis-parser/AST.h
-tools/toy-compiler/include/toy-analysis-parser/Lexer.h
-tools/toy-compiler/include/toy-analysis-parser/Parser.h
-tools/toy-compiler/lib/toy-parser/AST.cpp
-tools/toy-compiler/lib/toy-parser/CMakeLists.txt
+tools/toy-compiler/include/Dialect/Ops.td
+tools/toy-compiler/include/Dialect/Dialect.h
+tools/toy-compiler/include/Dialect/CMakeLists.txt
+tools/toy-compiler/include/CMakeLists.txt
+tools/toy-compiler/lib/Dialect/Dialect.cpp
+tools/toy-compiler/lib/Dialect/CMakeLists.txt
+
 
 
 # Modified
 tools/toy-compiler/toy-compiler.cpp
 tools/toy-compiler/CMakeLists.txt
 tools/toy-compiler/lib/CMakeLists.txt
+build-mlir-18.sh
 README.md
 
 
 # Example Toy code dir (e.g. ast.toy, codegen.toy, etc. )
+# Not Used in this tuto
 test/Examples/Toy/
 
 
 # Src code for toy compiler
-llvm-project/mlir/examples/toy/
+llvm-project/mlir/examples/toy/Ch2
 
 
 # Compile
@@ -79,35 +94,48 @@ llvm-project/mlir/examples/toy/
 
 
 # Test
-./build/bin/toy-compiler test/Examples/Toy/Ch1/ast.toy -emit=ast
+# If you want to use "installation" dir
+# echo $LLVM_PROJECT_ROOT => /path/to/llvm-18-src-build
+$LLVM_PROJECT_ROOT/installation/bin/mlir-tblgen tools/toy-compiler/include/Dialect/Ops.td -I $LLVM_PROJECT_ROOT/mlir/include/
+
+# Or this one
+$LLVM_PROJECT_ROOT/build/bin/mlir-tblgen tools/toy-compiler/include/Dialect/Ops.td -I $LLVM_PROJECT_ROOT/mlir/include/
+
 
 
 # Toy project scaffold upto this point
 
 └── tools
-    ├── CMakeLists.txt
     └── toy-compiler
-        ├── CMakeLists.txt  # <==== Don't forget to "set(LIBS MLIRToyParser)"
-        ├── include
-        │   └── toy-analysis-parser
-        │       ├── AST.h
-        │       ├── Lexer.h
-        │       └── Parser.h
-        ├── lib
-        │   ├── CMakeLists.txt
-        │   └── toy-parser
-        │       ├── AST.cpp
-        │       └── CMakeLists.txt
-        └── toy-compiler.cpp  # <==== This is your toy-compiler entry point (i.e. where main() exists)
+        ├── main.cpp
+        ├── CMakeLists.txt # <== updated
+        ├── include
+        │   ├── CMakeLists.txt # <== Newly added
+        │   ├── Dialect # <== Newly added
+        │   │   ├── CMakeLists.txt # <== With ".inc" generator tablegen commands. Alias "ToyCh2OpsIncGen" is created for all those commands.
+        │   │   ├── Dialect.h
+        │   │   └── Ops.td
+        │   └── toy-analysis-parser
+        │       ├── AST.h
+        │       ├── Lexer.h
+        │       └── Parser.h
+        ├── lib
+        │   ├── CMakeLists.txt # <== updated
+        │   ├── Dialect
+        │   │   ├── CMakeLists.txt # <== Newly added. "Dialect.cpp" is calling the alias "ToyCh2OpsIncGen" as it's dependency to execute all tablegen commands first; before Dialect.cpp is called by final compile chain.
+        │   │   └── Dialect.cpp # <== Newly added
+        │   └── toy-parser
+        │       ├── AST.cpp
+        │       └── CMakeLists.txt
 
 ```
 
 ## Key things
+- What, why, how of Dialect
+- How to integrated them with project
 
-**`build/bin/` contains the built binary `toy-compiler`. Now it has the parsing feature which can emit `AST`. progressively it will be filled by code**
 
-
-## ====== CHAPTER 1 Ends ======
+## ====== CHAPTER 2-0 Ends ======
 
 
 
@@ -122,6 +150,7 @@ In advance, sorry for too much "bla bla bla..." in this intro README. But it is 
 
 
 ## What you will learn here..
+- For what & why of MLIR - [Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md](Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md)
 - How to build `LLVM` for `MLIR`. You can use the same build for other purpose too 😉 (e.g. using `clang`/`clang++` as your regular compiler, instead of `gcc`/`g++`)! The version `18` is used for both `LLVM` & `MLIR`.
 - How to setup & work with MLIR `out-of-tree` project. What is an `out-of-tree` project, [briefly discussed here](Docs/TOY-TUTO/0.LLVM+MLIR-initial-setup-docs/0.1.SETUP-MLIR-OUT-OF-TREE-TEMPLATE.md).
 - How to play with `cmake`.
