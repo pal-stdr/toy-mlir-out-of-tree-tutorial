@@ -34,7 +34,7 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 
 ## How To?
 
-- - **I WILL STRONGLY RECOMMEND TO READ [Chapter 2: Emitting Basic MLIR](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/) FROM BEGINNING UNTIL THE END OF THE [Using the Operation Definition Specification (ODS) Framework](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/#using-the-operation-definition-specification-ods-framework) SECTION THOROUGHLY. THEN START FOLLOWING THE REST OF THIS DOC.**
+- **I WILL STRONGLY RECOMMEND TO READ [Chapter 2: Emitting Basic MLIR](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/) FROM BEGINNING UNTIL THE END OF THE [Using the Operation Definition Specification (ODS) Framework](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/#using-the-operation-definition-specification-ods-framework) SECTION THOROUGHLY. THEN START FOLLOWING THE REST OF THIS DOC.**
 - For what & why of MLIR - [Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md](Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-&-WHY-OF-MLIR-&-DIALECT.md)
 - For this chpater, Follow the guideline given in [Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT.md](Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT.md)
 - For `cmake` related query, go to [Docs/MISCELLANEOUS/CMAKE-HOW-TO](Docs/MISCELLANEOUS/CMAKE-HOW-TO).
