@@ -1,7 +1,7 @@
 # My Desktop
-# export LLVM_PROJECT_ROOT=$MY_EXTERNAL_SDD_WORK_DIR/compiler-projects/llvm-18-src-build
+export LLVM_PROJECT_ROOT=$MY_EXTERNAL_SDD_WORK_DIR/compiler-projects/llvm-18-src-build
 # My Laptop
-export LLVM_PROJECT_ROOT=$HOME/compiler-projects/llvm-18-src-build
+# export LLVM_PROJECT_ROOT=$HOME/compiler-projects/llvm-18-src-build
 # Add your $LLVM_PROJECT_ROOT path
 # export LLVM_PROJECT_ROOT=
 
