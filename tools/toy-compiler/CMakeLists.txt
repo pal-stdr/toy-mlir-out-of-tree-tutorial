@@ -19,7 +19,7 @@ include_directories("${TOY_INCLUDE_DIR}")
 
 # Added in Ch 2.0.
 # ${STANDALONE_BINARY_DIR} == /path/to/mlir-project/build/
-# For the auto gen ".inc" type headers, this is the location - build/tools/toy-compiler/include/Dialect
+# Example case: For the auto gen ".inc" type headers like "ToyDialectBase.h.inc" at "tools/toy-compiler/include/Dialect/ToyDialect", the common location is - build/tools/toy-compiler/include/
 include_directories("${STANDALONE_BINARY_DIR}/tools/toy-compiler/include")
 
 
@@ -39,7 +39,7 @@ add_subdirectory("${TOY_LIB_DIR}")
 # add new lib `MLIRToyParser` (i.e. alias to `AST.cpp`)
 set(LIBS
         MLIRToyParser
-        MLIRToyDialectCPP # <= Added in Ch 2.0
+        MLIRToyDialectBaseCPP # <= Added in Ch 2.0
 )
 
 
