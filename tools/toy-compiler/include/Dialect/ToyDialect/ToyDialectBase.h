@@ -11,8 +11,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef MLIR_TUTORIAL_TOY_DIALECT_H_
-#define MLIR_TUTORIAL_TOY_DIALECT_H_
+#ifndef TOY_DIALECT_H_
+#define TOY_DIALECT_H_
+
 
 #include "mlir/IR/Dialect.h"
 
@@ -21,8 +22,6 @@
 #include "Dialect/ToyDialect/ToyDialectBase.h.inc"
 
 
-/// To-do: Include the auto-generated header file containing the declarations of the
-/// toy operations.
 
 
-#endif // MLIR_TUTORIAL_TOY_DIALECT_H_
+#endif // TOY_DIALECT_H_

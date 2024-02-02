@@ -1,6 +1,15 @@
 # Set Toy Compiler binary filename
 set(TOY_COMPILER_BIN_NAME "toy-compiler")
 
+# Added in Ch 2.0.
+# Set dialect name (i.e. "Toy") and namespace (i.e. "toy")
+set(DIALECT_NAME "Toy")
+set(DIALECT_NAMESPACE "toy")
+set(DIALECT_BASE_FILENAME "${DIALECT_NAME}DialectBase.td")  # i.e. ToyDialectBase.td
+set(DIALECT_OPS_FILENAME "${DIALECT_NAME}Ops.td")  # i.e. ToyOps.td
+set(DIALECT_BASE "${DIALECT_NAME}DialectBase")  # i.e. ToyDialectBase
+set(DIALECT_OPS "${DIALECT_NAME}Ops")  # i.e. ToyOps
+
 
 # "${CMAKE_CURRENT_SOURCE_DIR}" always reads where the current `CMakeLists.txt` is located
 # Right now ${CMAKE_CURRENT_SOURCE_DIR} is called from this "/path/to/toy-mlir-out-of-tree-tutorial/tools/toy-compiler/CMakeLists.txt" file

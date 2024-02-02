@@ -53,7 +53,7 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 ```sh
 # Newly added Docs Dir
 Docs/MLIR-KNOWLEDGE-BASE/
-Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-&-EMIT-BASIC-MLIR/
+Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-and-EMIT-BASIC-MLIR
 
 
 # Newly added Docs
@@ -66,6 +66,7 @@ Docs/MISCELLANEOUS/CMAKE-HOW-TO/CMAKE-KNOWLEDGE.md
 
 
 # Newly added dirs for toy-compiler
+cmake/
 tools/toy-compiler/include/Dialect/
 tools/toy-compiler/include/Dialect/ToyDialect/
 tools/toy-compiler/lib/Dialect/
@@ -74,6 +75,7 @@ tools/toy-compiler/lib/Dialect/ToyDialect/
 
 
 # Newly added code files
+cmake/MyCustomCmakeUtils.cmake
 tools/toy-compiler/include/Dialect/ToyDialect/ToyDialectBase.td
 tools/toy-compiler/include/Dialect/ToyDialect/ToyDialectBase.h
 tools/toy-compiler/include/Dialect/ToyDialect/CMakeLists.txt

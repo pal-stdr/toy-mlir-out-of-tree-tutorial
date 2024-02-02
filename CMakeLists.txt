@@ -56,4 +56,9 @@ add_subdirectory(standalone-plugin)
 add_subdirectory(standalone-translate)
 
 # ==== Added later ====
+
+# ==== Customize CMake ====
+# ---- Custom CMake Utility Functions -----
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/MyCustomCmakeUtils.cmake")
+
 add_subdirectory(tools)
