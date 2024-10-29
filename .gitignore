@@ -10,3 +10,6 @@ build/bin/standalone-translate
 
 # If toy-compiler bin also cross the github filesize limit, we have to ignore it too
 # build/bin/toy-compiler
+
+# For VSCode
+.vscode/browse.vc.*

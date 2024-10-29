@@ -3,5 +3,5 @@ add_mlir_dialect_library(MLIRToyDialectBaseCPP
     ToyDialectBase.cpp
 
     DEPENDS
-    ToyCh2OpsIncGen # <= Telling cmake to generate .inc headers first. Add in Ch 2.0.
+    ToyCh20IncGen # <= Telling cmake to trigger the generation of .inc headers first.
 )

@@ -1,69 +1,77 @@
 {
     "env": {
-        "myDefaultIncludePath": [
-            "${workspaceFolder}",
-            "${env:LLVM_AND_CLANG_INCLUDE_PATH}"
+        "LLVM_PROJECT_ROOT": "${env:MY_EXTERNAL_SDD_WORK_DIR}/compiler-projects/llvm-18-src-build",
+        "myIncludePath": [
+            "/usr/include",
+            "/usr/include/x86_64-linux-gnu/c++/9"
         ],
-        "myCompilerPath": "${env:LLVM_AND_CLANG_BIN_PATH}/clang"
+        "myDefines": [
+            "DEBUG",
+            "MY_FEATURE=1"
+        ]
     },
     "configurations": [
         {
             "name": "Linux",
-            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "${env:LLVM_PROJECT_ROOT}/installation/bin/clang",
+            "compilerArgs": [""],
+            "intelliSenseMode": "linux-gcc-x86",
             "includePath": [
-                "${myDefaultIncludePath}",
-                "${workspaceFolder}/include/**",
-                "${workspaceFolder}/tools/toy-compiler/include/**"
+                "${myIncludePath}",
+                "${env:LLVM_PROJECT_ROOT}/installation/include",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/tools/toy-compiler/include",
+                "${workspaceFolder}/build/tools/toy-compiler/include"
             ],
-            "defines": [
-                // "FOO",
-                // "BAR=100"
-            ],
-            "forcedInclude": [
-                // "${workspaceFolder}/include/config.h"
-            ],
-            "compilerPath": "${env:LLVM_AND_CLANG_BIN_PATH}/clang++",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            // "compileCommands": "${workspaceFolder}/compile_commands.json",    
+            "defines": ["${myDefines}"],
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "forcedInclude": [""],
+            "compileCommands": "",
+            "dotConfig": "",
+            "mergeConfigurations": true,
+            "customConfigurationVariables": {
+                "myVar": "myvalue"
+            },
             "browse": {
                 "path": [
-                    "${workspaceFolder}"
+                    "${myIncludePath}",
+                    "${workspaceFolder}/include/",
+                    "${workspaceFolder}/tools/toy-compiler/include/",
+                    "${workspaceFolder}/build/tools/toy-compiler/include/"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
-            },
-            "configurationProvider": "ms-vscode.cmake-tools"
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db"
+            }
         },
         {
             "name": "Mac",
-            "intelliSenseMode": "clang-x64",
-            "includePath": [
-                "${myDefaultIncludePath}",
-                "/another/path"
-            ],
-            "macFrameworkPath": [
-                "/System/Library/Frameworks"
-            ],
-            "defines": [
-                "FOO",
-                "BAR=100"
-            ],
-            "forcedInclude": [
-                "${workspaceFolder}/include/config.h"
-            ],
             "compilerPath": "/usr/bin/clang",
+            "intelliSenseMode": "macos-clang-x64",
+            "includePath": ["${myIncludePath}"],
+            "defines": ["${myDefines}"],
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "compileCommands": "/path/to/compile_commands.json",
+            "macFrameworkPath": ["/System/Library/Frameworks", "/Library/Frameworks"],
             "browse": {
-                "path": [
-                    "${workspaceFolder}"
-                ],
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
+                "path": ["${myIncludePath}", "${workspaceFolder}"]
+            }
+        },
+        {
+            "name": "Win32",
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx64/x64/cl.exe",
+            "intelliSenseMode": "windows-msvc-x64",
+            "includePath": ["${myIncludePath}"],
+            "defines": ["${myDefines}", "_WINDOWS"],
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "windowsSdkVersion": "10.0.19041.0",
+            "browse": {
+                "path": ["${myIncludePath}", "${workspaceFolder}"]
             }
         }
     ],
-    "version": 4
+    "version": 4,
+    "enableConfigurationSquiggles": true
 }
