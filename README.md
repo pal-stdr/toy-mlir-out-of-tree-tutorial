@@ -11,7 +11,7 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 - `ch-0-1-prep-mlir-template`: How to collect and setup the `MLIR out-of-tree` template.
 - `ch-0-2-prep-toy-scaffold`: How to setup just `Toy` compiler project scaffold. [Note: Without using/collecting the lexer, parser codes.]
 - `ch-1-toy-parser`: How to collect & setup lexer, parser from `llvm-18-src-build` (i.e. `llvm-project`) for Toy language.
-- `ch-2-0-init-setup-toy-dialect`: Setting up the Dialect headers and lib. No changes in `tools/toy-compiler/toy-compiler.cpp`
+- `ch-2-0-init-setup-toy-dialect`: Setting up the Dialect headers and lib. No important changes in `tools/toy-compiler/toy-compiler.cpp`
 - More coming....
 
 
@@ -41,8 +41,8 @@ Date: Tue Jan 2 12:06:27 2024 +0100
 
 ## How To?
 
-- **I WILL STRONGLY RECOMMEND TO READ [Chapter 2: Emitting Basic MLIR](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/) FROM BEGINNING UNTIL THE END OF THE [Using the Operation Definition Specification (ODS) Framework](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/#using-the-operation-definition-specification-ods-framework) SECTION THOROUGHLY. THEN START FOLLOWING THE REST OF THIS DOC.**
 - **For this chpater, Follow the guideline given in [Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-and-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT.md](Docs/TOY-TUTO/2.SETUP-TOY-DIALECT-and-EMIT-BASIC-MLIR/2.0.INIT-SETUP-OF-TOY-DIALECT.md)**
+- **I WILL STRONGLY RECOMMEND TO READ [Chapter 2: Emitting Basic MLIR](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/) FROM BEGINNING UNTIL THE END OF THE [Using the Operation Definition Specification (ODS) Framework](https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/#using-the-operation-definition-specification-ods-framework) SECTION THOROUGHLY. THEN START FOLLOWING THE REST OF THIS DOC.**
 - For what & why of MLIR - [Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-WHY-OF-MLIR.md](Docs/MLIR-KNOWLEDGE-BASE/1.WHAT-WHY-OF-MLIR.md)
 - A short intro to `MLIR` Dialect - [Docs/MLIR-KNOWLEDGE-BASE/2.WHAT-IS-DIALECT.md](Docs/MLIR-KNOWLEDGE-BASE/2.WHAT-IS-DIALECT.md)
 - For `cmake` related query, go to [Docs/MISCELLANEOUS/CMAKE-HOW-TO](Docs/MISCELLANEOUS/CMAKE-HOW-TO).
@@ -123,6 +123,10 @@ $LLVM_PROJECT_ROOT/installation/bin/mlir-tblgen -gen-dialect-doc tools/toy-compi
 
 # Toy project scaffold upto this point
 
+├── cmake
+│   └── MyCustomCmakeUtils.cmake # <== add_mlir_dialect_customized() defined here w/ tablegen commands to generate .inc type headers.
+....
+...
 └── tools
     ├── CMakeLists.txt
     └── toy-compiler
@@ -131,12 +135,11 @@ $LLVM_PROJECT_ROOT/installation/bin/mlir-tblgen -gen-dialect-doc tools/toy-compi
         │   ├── CMakeLists.txt # <== Newly added
         │   ├── Dialect # <== Newly added
         │   │   ├── CMakeLists.txt
-        │   │   ├── Ops.td
         │   │   └── ToyDialect
-        │   │       ├── CMakeLists.txt # <== Newly added with ".inc" generator tablegen commands. Alias "ToyCh2OpsIncGen" is created for all those commands.
+        │   │       ├── CMakeLists.txt # <== Autogeneration process of ".inc" type headers are defined here.
         │   │       ├── ToyDialectBase.h
         │   │       └── ToyDialectBase.td
-        │   └── toy-analysis-parser # <== But it has no "CMakeLists.txt", because it has no purpose of gen of ".inc" type of header files
+        │   └── toy-analysis-parser
         │       ├── AST.h
         │       ├── Lexer.h
         │       └── Parser.h
@@ -145,18 +148,17 @@ $LLVM_PROJECT_ROOT/installation/bin/mlir-tblgen -gen-dialect-doc tools/toy-compi
         │   ├── Dialect # <== Newly added
         │   │   ├── CMakeLists.txt
         │   │   └── ToyDialect
-        │   │       ├── CMakeLists.txt # <== ToyDialectBase.cpp is calling the alias "ToyCh2OpsIncGen" as it's dependency to execute all tablegen commands first; before Dialect.cpp is called by final compile chain.
-        │   │       └── ToyDialectBase.cpp
+        │   │       ├── CMakeLists.txt # <== ToyDialectBase.cpp is calling the alias "ToyCh2OpsIncGen" as it's dependency to execute all tablegen commands first; before Dialect.cpp is called by final compilation chain.
+        │   │       └── ToyDialectBase.cpp # <== Initialize the ToyDialect
         │   └── toy-parser
         │       ├── AST.cpp
         │       └── CMakeLists.txt
         └── toy-compiler.cpp
-
 ```
 
 ## Key things
 - What, why, how of Dialect
-- How to integrated them with project
+- How to define & integrated a Dialect with this project
 
 
 ## ====== CHAPTER 2-0 Ends ======

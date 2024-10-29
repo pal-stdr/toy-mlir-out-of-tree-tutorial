@@ -18,13 +18,12 @@
 #ifndef TOY_DIALECT
 #define TOY_DIALECT
 
+
 include "mlir/IR/OpBase.td"
 
 
-
-
-// Provide a definition of the 'toy' dialect in the ODS framework so that we
-// can define our operations.
+/// Provide a definition of the 'ToyDialect' dialect in the ODS framework so that we
+/// can register our operations to it.
 def Toy_Dialect : Dialect {
     let name = "toy";
     let summary = "A high-level dialect for analyzing and optimizing the Toy language";
@@ -37,26 +36,6 @@ def Toy_Dialect : Dialect {
     let cppNamespace = "::mlir::toy";
 }
 
-
-//===----------------------------------------------------------------------===//
-// Base Toy operation definition.
-//===----------------------------------------------------------------------===//
-
-// Base class for toy operations for ToyDialect. This dialect inherits from the base
-// `Op` class in OpBase.td, and provides:
-//   * The parent dialect of the operation.
-//   * The mnemonic for the operation, or the name without the dialect prefix.
-//   * A list of traits for the operation.
-// class Toy_Op<string mnemonic, list<Trait> traits = []> :
-//     Op<Toy_Dialect, mnemonic, traits>;
-
-
-
-// We will define rest of the toy operations (i.e. 1.ConstantOp, 2.AddOp, 3.FuncOp,
-// 4.GenericCallOp, 5.MulOp, 6.PrintOp, 7.ReshapeOp, 8.ReturnOp, 9.TransposeOp) by inheriting
-// from our base 'Toy_Op' class above.
-
-// VERY IMPORTANT: And Those will be defined in "ToyOps.td" file.
 
 
 
